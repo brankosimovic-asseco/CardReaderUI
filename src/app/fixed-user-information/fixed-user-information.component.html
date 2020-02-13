@@ -1,30 +1,57 @@
-<mat-card>
-    <mat-card-title>Fixed Personal Data</mat-card-title> 
-    <hr>
-    <br>
-    <mat-card-content *ngIf="allDone">
-        <img *ngIf="allDone" [src]=getSanitizeUrl(portrait.portraitData) alt="">
-        <p>Personal Number: {{fixedPersonalData.personalNumber}}</p>
-        <br>
-        <p>Given Name: {{fixedPersonalData.givenName}}</p>
-        <br>
-        <p>Surname: {{fixedPersonalData.surname}}</p>
-        <br>
-        <p>Parent Given Name: {{fixedPersonalData.parentGivenName}}</p>
-        <br>
-        <p>Date of Birth: {{fixedPersonalData.dateOfBirth}}</p>
-        <br>
-        <p>Place of Birth: {{fixedPersonalData.placeOfBirth}}</p>
-        <br>
-        <p>Sex: {{fixedPersonalData.sex}}</p>
-        <br>
-        <p>State of birth: {{fixedPersonalData.stateOfBirth}}</p>
-        <br>
-        <p>Community of Birth: {{fixedPersonalData.communityOfBirth}}</p>
-        <br>
-        <p>Nationality: {{fixedPersonalData.nationality}}</p>
+<mat-spinner *ngIf="!allDone"></mat-spinner>
+<mat-card *ngIf="allDone">
+    <mat-card-title>Čitač elektronske lične karte</mat-card-title>
+    <mat-card-content>
+        <img [src]=getSanitizeUrl(portrait.portraitData) alt="">
 
-        <br>
-      
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>Podaci o građaninu</mat-expansion-panel-header>
+
+                <mat-grid-list cols="2">
+                    <mat-grid-tile>Prezime</mat-grid-tile>
+                    <mat-grid-tile>{{ fixedPersonalData.surname }}</mat-grid-tile>
+
+                    <mat-grid-tile>Ime</mat-grid-tile>
+                    <mat-grid-tile>{{ fixedPersonalData.givenName }}</mat-grid-tile>
+
+                    <mat-grid-tile>Ime jednog roditelja</mat-grid-tile>
+                    <mat-grid-tile>{{ fixedPersonalData.parentGivenName }}</mat-grid-tile>
+
+                    <mat-grid-tile>Datum rođenja</mat-grid-tile>
+                    <mat-grid-tile>{{ fixedPersonalData.dateOfBirth }}</mat-grid-tile>
+
+                    <mat-grid-tile>Mesto rođenja, opština i država</mat-grid-tile>
+                    <mat-grid-tile>{{ fixedPersonalData.placeOfBirth }}, {{ fixedPersonalData.communityOfBirth }}, {{ fixedPersonalData.stateOfBirth }}</mat-grid-tile>
+
+                    <mat-grid-tile>Prebivalište i adresa stana</mat-grid-tile>
+                    <mat-grid-tile>bla</mat-grid-tile>
+
+                    <mat-grid-tile>JMBG</mat-grid-tile>
+                    <mat-grid-tile>{{ fixedPersonalData.personalNumber }}</mat-grid-tile>
+
+                    <mat-grid-tile>Pol</mat-grid-tile>
+                    <mat-grid-tile>{{ fixedPersonalData.sex }}</mat-grid-tile>
+                </mat-grid-list>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>Podaci o dokumentu</mat-expansion-panel-header>
+
+                <mat-grid-list cols="2">
+                    <mat-grid-tile>Dokument izdaje</mat-grid-tile>
+                    <mat-grid-tile>bla</mat-grid-tile>
+
+                    <mat-grid-tile>Broj dokumenta</mat-grid-tile>
+                    <mat-grid-tile>bla</mat-grid-tile>
+
+                    <mat-grid-tile>Datum izdavanja</mat-grid-tile>
+                    <mat-grid-tile>bla</mat-grid-tile>
+
+                    <mat-grid-tile>Važi do</mat-grid-tile>
+                    <mat-grid-tile>bla</mat-grid-tile>
+                </mat-grid-list>
+            </mat-expansion-panel>
+        </mat-accordion>
     </mat-card-content>
 </mat-card>
