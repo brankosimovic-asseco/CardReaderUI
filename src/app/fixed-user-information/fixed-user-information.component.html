@@ -2,30 +2,29 @@
     <mat-card-title>Fixed Personal Data</mat-card-title> 
     <hr>
     <br>
-    <mat-card-content *ngIf='FixedPersonalData'>
-        <img [src]='portraitData' alt="">
-        <p>Personal Number: {{fixedUserInfo.personalNumber}}</p>
+    <mat-card-content *ngIf="fixedPersonalData">
+        <img *ngIf="portrait" [src]="portrait.portraitData" alt="">
+        <p>Personal Number: {{fixedPersonalData.personalNumber}}</p>
         <br>
-        <p>Given Name: {{fixedUserInfo.givenName}}</p>
+        <p>Given Name: {{fixedPersonalData.givenName}}</p>
         <br>
-        <p>Surname: {{fixedUserInfo.surname}}</p>
+        <p>Surname: {{fixedPersonalData.surname}}</p>
         <br>
-        <p>Parent Given Name: {{fixedUserInfo.parentGivenName}}</p>
+        <p>Parent Given Name: {{fixedPersonalData.parentGivenName}}</p>
         <br>
-        <p>Date of Birth: {{fixedUserInfo.dateOfBirth}}</p>
+        <p>Date of Birth: {{fixedPersonalData.dateOfBirth}}</p>
         <br>
-        <p>Place of Birth: {{fixedUserInfo.placeOfBirth}}</p>
+        <p>Place of Birth: {{fixedPersonalData.placeOfBirth}}</p>
         <br>
-        <p>Sex: {{fixedUserInfo.sex}}</p>
+        <p>Sex: {{fixedPersonalData.sex}}</p>
         <br>
-        <p>State of birth: {{fixedUserInfo.stateOfBirth}}</p>
+        <p>State of birth: {{fixedPersonalData.stateOfBirth}}</p>
         <br>
-        <p>Community of Birth: {{fixedUserInfo.communityOfBirth}}</p>
+        <p>Community of Birth: {{fixedPersonalData.communityOfBirth}}</p>
         <br>
-        <p>Nationality: {{fixedUserInfo.nationality}}</p>
+        <p>Nationality: {{fixedPersonalData.nationality}}</p>
 
         <br>
       
     </mat-card-content>
-    <button color="primary" (click)="getData()" mat-raised-button>Get Data</button>
 </mat-card>
