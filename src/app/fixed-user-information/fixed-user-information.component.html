@@ -1,0 +1,31 @@
+<mat-card >
+    <mat-card-title>Fixed Personal Data</mat-card-title> 
+    <hr>
+    <br>
+    <mat-card-content *ngIf='FixedPersonalData'>
+        <img [src]='portraitData' alt="">
+        <p>Personal Number: {{fixedUserInfo.personalNumber}}</p>
+        <br>
+        <p>Given Name: {{fixedUserInfo.givenName}}</p>
+        <br>
+        <p>Surname: {{fixedUserInfo.surname}}</p>
+        <br>
+        <p>Parent Given Name: {{fixedUserInfo.parentGivenName}}</p>
+        <br>
+        <p>Date of Birth: {{fixedUserInfo.dateOfBirth}}</p>
+        <br>
+        <p>Place of Birth: {{fixedUserInfo.placeOfBirth}}</p>
+        <br>
+        <p>Sex: {{fixedUserInfo.sex}}</p>
+        <br>
+        <p>State of birth: {{fixedUserInfo.stateOfBirth}}</p>
+        <br>
+        <p>Community of Birth: {{fixedUserInfo.communityOfBirth}}</p>
+        <br>
+        <p>Nationality: {{fixedUserInfo.nationality}}</p>
+
+        <br>
+      
+    </mat-card-content>
+    <button color="primary" (click)="getData()" mat-raised-button>Get Data</button>
+</mat-card>
