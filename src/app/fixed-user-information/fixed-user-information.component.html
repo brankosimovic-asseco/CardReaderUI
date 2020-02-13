@@ -1,9 +1,9 @@
-<mat-card >
+<mat-card>
     <mat-card-title>Fixed Personal Data</mat-card-title> 
     <hr>
     <br>
-    <mat-card-content *ngIf="fixedPersonalData">
-        <img *ngIf="portrait" [src]="portrait.portraitData" alt="">
+    <mat-card-content *ngIf="allDone">
+        <img *ngIf="allDone" [src]=getSanitizeUrl(portrait.portraitData) alt="">
         <p>Personal Number: {{fixedPersonalData.personalNumber}}</p>
         <br>
         <p>Given Name: {{fixedPersonalData.givenName}}</p>
