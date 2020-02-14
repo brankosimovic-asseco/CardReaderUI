@@ -3,12 +3,13 @@
     <mat-card-title>Čitač elektronske lične karte</mat-card-title>
     <mat-card-content>
         <img [src]=getSanitizeUrl(portrait.portraitData) alt="">
-
+        <br>
+        <br>
         <mat-accordion>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>Podaci o građaninu</mat-expansion-panel-header>
 
-                <mat-grid-list cols="2">
+                <mat-grid-list [cols]="2" rowHeight="2rem">
                     <mat-grid-tile>Prezime</mat-grid-tile>
                     <mat-grid-tile>{{ fixedPersonalData.surname }}</mat-grid-tile>
 
@@ -25,7 +26,7 @@
                     <mat-grid-tile>{{ fixedPersonalData.placeOfBirth }}, {{ fixedPersonalData.communityOfBirth }}, {{ fixedPersonalData.stateOfBirth }}</mat-grid-tile>
 
                     <mat-grid-tile>Prebivalište i adresa stana</mat-grid-tile>
-                    <mat-grid-tile>bla</mat-grid-tile>
+                    <mat-grid-tile>{{ variableData.place}} {{variableData.street}} {{variableData.houseNumber}}</mat-grid-tile>
 
                     <mat-grid-tile>JMBG</mat-grid-tile>
                     <mat-grid-tile>{{ fixedPersonalData.personalNumber }}</mat-grid-tile>
@@ -38,18 +39,18 @@
             <mat-expansion-panel>
                 <mat-expansion-panel-header>Podaci o dokumentu</mat-expansion-panel-header>
 
-                <mat-grid-list cols="2">
+                <mat-grid-list cols="2" rowHeight="2rem">
                     <mat-grid-tile>Dokument izdaje</mat-grid-tile>
-                    <mat-grid-tile>bla</mat-grid-tile>
+                    <mat-grid-tile> {{documentData.issuingAuthority}} </mat-grid-tile>
 
                     <mat-grid-tile>Broj dokumenta</mat-grid-tile>
-                    <mat-grid-tile>bla</mat-grid-tile>
+                    <mat-grid-tile> {{documentData.docRegNo}}</mat-grid-tile>
 
                     <mat-grid-tile>Datum izdavanja</mat-grid-tile>
-                    <mat-grid-tile>bla</mat-grid-tile>
+                    <mat-grid-tile>{{documentData.issuingDate}}</mat-grid-tile>
 
                     <mat-grid-tile>Važi do</mat-grid-tile>
-                    <mat-grid-tile>bla</mat-grid-tile>
+                    <mat-grid-tile>{{documentData.expiryDate}}</mat-grid-tile>
                 </mat-grid-list>
             </mat-expansion-panel>
         </mat-accordion>

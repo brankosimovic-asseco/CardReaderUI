@@ -4,6 +4,8 @@ import { FixedPersonalData } from '../model/fixed-personal-data';
 import { Observable } from 'rxjs';
 
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DocumentData } from '../model/document-data';
+import { VariableData } from '../model/variable-data';
 
 @Component({
   selector: 'app-fixed-user-information',
@@ -13,6 +15,8 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 export class FixedUserInformationComponent implements OnInit, OnDestroy {
 
   fixedPersonalData: FixedPersonalData;
+  documentData: DocumentData;
+  variableData: VariableData;
   portrait: any;
   allDone: boolean;
 
@@ -34,14 +38,24 @@ export class FixedUserInformationComponent implements OnInit, OnDestroy {
         this.subscriptions.push(
           this.cardDataService.getPortrait().subscribe(portrait => {
             this.portrait = portrait;
-            this.allDone = true;
+
+            this.subscriptions.push(this.cardDataService.getDocumentData().subscribe(docData => {
+              this.documentData = docData;
+              console.log(docData);
+              this.subscriptions.push(this.cardDataService.getVariableData().subscribe(varData =>{
+                this.variableData = varData;
+                this.allDone = true;
+              })
+              );
+            }));
           })
         );
       })
     );
+    
   }
 
-  public getSanitizeUrl(url:string) {
+  public getSanitizeUrl(url: string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
