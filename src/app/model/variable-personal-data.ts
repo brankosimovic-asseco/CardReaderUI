@@ -1,4 +1,4 @@
-export class VariableData {
+export class VariablePersonalData {
     public state: string;
     public community: string;
     public place: string;
@@ -10,5 +10,6 @@ export class VariableData {
     public apartmentNumber: string;
     public addressDate: string;
     public addressLabel: string;
+
     constructor() {}
 }

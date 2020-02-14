@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CardDataService} from '../card-data.service';
-import { FixedPersonalData } from '../model/fixed-personal-data';
-import { Observable } from 'rxjs';
+import { forkJoin } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { CardDataService} from '../card-data.service';
+
 import { DocumentData } from '../model/document-data';
-import { VariableData } from '../model/variable-data';
+import { FixedPersonalData } from '../model/fixed-personal-data';
+import { VariablePersonalData } from '../model/variable-personal-data';
+import { Portrait } from '../model/portrait';
 
 @Component({
   selector: 'app-fixed-user-information',
@@ -16,11 +18,11 @@ export class FixedUserInformationComponent implements OnInit, OnDestroy {
 
   fixedPersonalData: FixedPersonalData;
   documentData: DocumentData;
-  variableData: VariableData;
-  portrait: any;
+  variablePersonalData: VariablePersonalData;
+  portrait: Portrait;
   allDone: boolean;
 
-  subscriptions = [];
+  subscription: any;
 
   constructor(private cardDataService: CardDataService, private sanitizer: DomSanitizer) { }
 
@@ -29,30 +31,22 @@ export class FixedUserInformationComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-
-    this.subscriptions.push(
-      this.cardDataService.getFixedPersonalData().subscribe(fixedPersonalData => {
-        console.log('fixedPersonalData!');
-        this.fixedPersonalData = fixedPersonalData;
-
-        this.subscriptions.push(
-          this.cardDataService.getPortrait().subscribe(portrait => {
-            this.portrait = portrait;
-
-            this.subscriptions.push(this.cardDataService.getDocumentData().subscribe(docData => {
-              this.documentData = docData;
-              console.log(docData);
-              this.subscriptions.push(this.cardDataService.getVariableData().subscribe(varData =>{
-                this.variableData = varData;
-                this.allDone = true;
-              })
-              );
-            }));
-          })
-        );
-      })
+    this.subscription = forkJoin(
+      this.cardDataService.getDocumentData(),
+      this.cardDataService.getFixedPersonalData(),
+      this.cardDataService.getVariablePersonalData(),
+      this.cardDataService.getPortrait()
+    ).subscribe(
+      (([documentData, fixedPersonalData, variablePersonalData, portrait] :
+        [DocumentData, FixedPersonalData, VariablePersonalData, Portrait]) => {
+          this.documentData = documentData;
+          this.fixedPersonalData = fixedPersonalData;
+          this.variablePersonalData = variablePersonalData;
+          this.portrait = portrait;
+          this.allDone = true;
+        }
+      )
     );
-    
   }
 
   public getSanitizeUrl(url: string) {
@@ -60,9 +54,7 @@ export class FixedUserInformationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    for(let subscription of this.subscriptions) {
-      subscription.unsubscribe();
-    }
+    this.subscription.unsubscribe();
   }
 
 }
